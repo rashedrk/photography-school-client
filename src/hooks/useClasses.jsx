@@ -1,17 +1,16 @@
-// import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 
-// const useClasses = () => {
-//     const {  data: classes = [] } = useQuery({
-//         queryKey: ['classes'],
-//         queryFn: async () => {
-//             const res = await fetch('http://localhost:3000/classes');
-//             console.log(res);
-//             return res.data;
-//         }
-//     })
+const useClasses = () => {
+    const {  data: classes = [] } = useQuery({
+        queryKey: ['classes'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:3000/classes');
+            return res.json();
+        }
+    })
 
-//     return [classes];
-// };
+    return [classes];
+};
 
-// export default useClasses;
+export default useClasses;
