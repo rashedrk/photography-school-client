@@ -12,7 +12,7 @@ const TopClasses = () => {
             .then(res => res.json())
             .then(data => setClasses(data))
     }, []);
-    console.log("all data ", classes);
+   
 
     return (
         <>

@@ -2,7 +2,7 @@
 
 const TopInstructorCard = ({ instructor}) => {
     const {image, name} = instructor;
-    console.log(instructor);
+   
     return (
         <div className="text-center">
             <div className="avatar">

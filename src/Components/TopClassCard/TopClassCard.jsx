@@ -1,7 +1,7 @@
 import { FaUserGraduate } from 'react-icons/fa';
 
 const TopClassCard = ({ classItem }) => {
-    console.log(classItem);
+    
     const { name, image, instructor, enrolled, price } = classItem;
     return (
         <div className="card w-96 bg-base-100 shadow-xl">
