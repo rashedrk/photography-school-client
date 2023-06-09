@@ -1,16 +1,18 @@
-import SectionTitle from "../../../Components/SectionTitle/SectionTitile";
-import TopClassCard from "../../../Components/TopClassCard/TopClassCard";
+import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
+
 import { useEffect, useState } from "react";
+import TopClassCard from "../../../Components/TopClassCard/TopClassCard";
 
 
 const TopClasses = () => {
     const [classes, setClasses] = useState([]);
+
     useEffect(() => {
         fetch('http://localhost:3000/classes/top')
             .then(res => res.json())
             .then(data => setClasses(data))
-    }, [])
-
+    }, []);
+    console.log("all data ", classes);
 
     return (
         <>
