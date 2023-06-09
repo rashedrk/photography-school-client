@@ -1,14 +1,15 @@
 
 
-const InstructorCard = () => {
+const InstructorCard = ({ instructor }) => {
+    const { name, email, image } = instructor;
     return (
-        <div className="card card-side bg-base-100 shadow-xl">
-            <figure><img src="/images/stock/photo-1635805737707-575885ab0820.jpg" alt="Movie" /></figure>
+        <div className="card mb-10 lg:card-side bg-base-100 shadow-xl">
+            <figure className="lg:w-96"><img src={image} alt="" /></figure>
             <div className="card-body">
-                <h2 className="card-title">New movie is released!</h2>
-                <p>Click the button to watch on Jetflix app.</p>
+                <h2  className="card-title">{name}</h2>
+                <p>{email}</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Watch</button>
+                    <button className="btn primary-btn">See Classes</button>
                 </div>
             </div>
         </div>
