@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 .primary-btn {
-  background-color: #ea4a34;
+  background-color: #fa6a57;
   border: none;
   color: white;
 }
 .primary-btn:hover {
-  background-color: #ea6b34;
+  background-color: #fe4c00;
 }
