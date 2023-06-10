@@ -6,7 +6,7 @@ import { MdWatchLater } from "react-icons/md";
 const ClassesCard = ({classItem}) => {
     const {name, image, instructor, availableSeats, price} = classItem
     return (
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className={`card w-96 ${availableSeats == 0 ? 'bg-red-200' : 'bg-base-100'} shadow-xl`}>
             <figure className="px-10 pt-10">
                 <img src={image} alt="" className="rounded-xl" />
             </figure>
@@ -20,7 +20,7 @@ const ClassesCard = ({classItem}) => {
                 <p>{instructor}</p>
                 <p className="text-2xl font-semibold text-orange-600">${price}</p>
                 <div className="card-actions mt-2">
-                    <button className="btn primary-btn">Select</button>
+                    <button className="btn primary-btn" disabled={availableSeats == 0 && true} >Select</button>
                 </div>
             </div>
         </div>
