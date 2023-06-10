@@ -13,6 +13,7 @@ const ClassesCard = ({ classItem }) => {
     const [, refetch] = useCarts();
     const navigate = useNavigate();
     const location = useLocation();
+    console.log(location);
 
     const { _id, name, image, instructor, availableSeats, price } = classItem;
 
@@ -42,7 +43,7 @@ const ClassesCard = ({ classItem }) => {
                 confirmButtonText: 'Login!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // TODO : Location not redirect to class page 
+                    
                     navigate('/login', { state: { from: location } });
                 }
             })

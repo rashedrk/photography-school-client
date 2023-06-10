@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link,  useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/login.jpg"
 import { AiFillEye } from 'react-icons/ai';
 import { useState } from "react";
@@ -11,6 +11,9 @@ import Swal from "sweetalert2";
 const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
 
     // state to manage password visibility
     const [isVisible, setIsVisible] = useState(false);
@@ -19,19 +22,19 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         login(data.email, data.password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            Swal.fire({
-                
-                icon: 'success',
-                title: 'User successfully Logged in',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            navigate('/')
-        })
-        .then(err => console.log(err))
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                Swal.fire({
+
+                    icon: 'success',
+                    title: 'User successfully Logged in',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate(from, { replace: true });
+            })
+            .then(err => console.log(err))
     }
     return (
         <>
@@ -59,9 +62,9 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                
-                                    <input type={isVisible ? 'text' : 'password'} {...register("password", { required: true })} placeholder="password" className="input input-bordered" />
-                                    
+
+                                <input type={isVisible ? 'text' : 'password'} {...register("password", { required: true })} placeholder="password" className="input input-bordered" />
+
                             </div>
                             <div className="form-control items-center mt-6">
                                 <button className="btn primary-btn w-full lg:w-2/3">Login</button>
@@ -71,7 +74,7 @@ const Login = () => {
                             </div>
                         </form>
                         <button onClick={() => setIsVisible(!isVisible)} className="absolute left-80 top-[253px]"><AiFillEye className="text-[#fa6a57] text-lg" /></button>
-                                
+
                         <div className="-mt-5 divider">or</div>
                         <div className="text-center mb-3">
                             <SocialLogin />
