@@ -7,9 +7,11 @@ import axios from "axios";
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
+
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState([]);
-    const [loading, setLoading] = useState([]);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     const googleProvider = new GoogleAuthProvider();
 
     // get current user
@@ -18,8 +20,11 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             if (currentUser) {
                 axios.post('http://localhost:3000/jwt', { email: currentUser.email })
-                    .then(data => localStorage.setItem('access-token', data.data.token))
-                setLoading(false);
+                    .then(data => {
+                        localStorage.setItem('access-token', data.data.token);
+                        setLoading(false);
+                    })
+                    
             } else {
                 localStorage.removeItem('access-token')
             }
@@ -30,26 +35,31 @@ const AuthProvider = ({ children }) => {
 
     // create user by signup 
     const signup = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     //login user
     const login = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
     //login user by google
     const googleLogin = () => {
+        setLoading(true);
         return signInWithPopup(auth, googleProvider)
 
     }
 
     //logout user
     const logout = () => {
+        setLoading(true);
         return signOut(auth);
     }
 
     const updateUserProfile = (name, photo) => {
+        
         return updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: photo

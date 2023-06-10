@@ -3,7 +3,7 @@ import useClasses from '../../hooks/useClasses';
 const Classes = () => {
     const [classes] = useClasses();
     const approvedClasses = classes.filter(item => item.status === "approved")
-    console.log(classes);
+
     return (
         <div className='grid pt-14 mb-14 md:grid-cols-3 justify-center gap-4'>
             {

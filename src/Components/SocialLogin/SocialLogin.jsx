@@ -19,16 +19,15 @@ const SocialLogin = () => {
                 }
                 //register user to db
                 axios.post('http://localhost:3000/users', loggedUser)
-                    .then(res => {
-                        if (res.data.insertedId) {
+                    .then(() => {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'User successfully Registered',
+                                title: 'User successfully Login',
                                 showConfirmButton: false,
                                 timer: 1500
                             });
                             navigate(from, {replace: true})
-                        }
+                        
                         })
             })
         }
