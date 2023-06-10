@@ -21,8 +21,18 @@ const TopInstructors = () => {
         <>
             <SectionTitle title="Meet Top Instructors" subTitle="Our Team " />
             <Swiper
-                slidesPerView={4}
-                spaceBetween={30}
+                
+                breakpoints={{
+                    576: {
+                        // width: 576,
+                        slidesPerView: 2,
+                    },
+                    768: {
+                        // width: 768,
+                        slidesPerView: 4,
+                        
+                    },
+                }}
                 autoplay={{
                     delay: 2400,
                     disableOnInteraction: false,
@@ -30,8 +40,8 @@ const TopInstructors = () => {
                 pagination={{
                     clickable: true,
                 }}
-                modules={[Pagination,Autoplay]}
-                className="my-10"
+                modules={[Pagination, Autoplay]}
+                className="my-10 "
             >
                 {
                     instructors.map(instructor => <SwiperSlide key={instructor._id}>
