@@ -1,9 +1,48 @@
 import { useForm } from "react-hook-form";
 import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
+import useAuth from "../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+
+const hostingToken = import.meta.env.VITE_IMGBB_KEY;
 
 const AddClass = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { user } = useAuth()
+    const [axiosSecure] = useAxiosSecure();
+
+    const onSubmit = data => {
+        console.log(data);
+        const formData = new FormData();
+        formData.append('image', data.image[0])
+        //hosting image to imagbb
+        fetch(`https://api.imgbb.com/1/upload?key=${hostingToken}`, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(responseImg => {
+                if (responseImg.success) {
+                    const imgURL = responseImg.data.display_url;
+                    const { name, instructor, email, availableSeats, price } = data;
+                    const newClass = { name, image: imgURL, instructor, email, availableSeats: parseInt(availableSeats), price: parseFloat(price), status: "pending" };
+                    console.log(newClass);
+                    //send new class data to db
+                    axiosSecure.post('/classes', newClass)
+                        .then(res => {
+                            if (res.data.insertedId) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Class successfully added',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        })
+                }
+
+            })
+    };
 
     return (
         <div>
@@ -25,21 +64,21 @@ const AddClass = () => {
                         <label className="label">
                             <span className="label-text">Class Image</span>
                         </label>
-                        <input type="text" {...register("image", { required: true })} placeholder="image" className="input input-bordered" />
+                        <input type="file" {...register("image", { required: true })} className="file-input file-input-bordered file-input-sm w-full max-w-xs " />
                         {errors.image && <span className="text-red-600">image field is required</span>}
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Instructor Name</span>
                         </label>
-                        <input type="text" {...register("instructor", { required: true })} placeholder="Enter Instructor name" className="input input-bordered" />
+                        <input type="text" value={user.displayName} {...register("instructor", { required: true })} placeholder="Enter Instructor name" className="input input-bordered" />
                         {errors.instructor && <span className="text-red-600">instructor name field is required</span>}
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
-                        <input type="text" {...register("email", { required: true })} placeholder="Enter instructor email" className="input input-bordered" />
+                        <input type="email" value={user.email} {...register("email", { required: true })} placeholder="Enter instructor email" className="input input-bordered" />
                         {errors.email && <span className="text-red-600">Email field is required</span>}
                     </div>
                     <div className="form-control">
@@ -54,7 +93,7 @@ const AddClass = () => {
                         <label className="label">
                             <span className="label-text">Price</span>
                         </label>
-                        <input type="number" {...register("price", { required: true })} placeholder="price" className="input input-bordered" />
+                        <input type="text" {...register("price", { required: true })} placeholder="price" className="input input-bordered" />
                         {errors.price && <span className="text-red-600">price field is required</span>}
                     </div>
                 </div>
