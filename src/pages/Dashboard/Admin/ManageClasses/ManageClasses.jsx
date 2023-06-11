@@ -1,9 +1,13 @@
+
+import { Link } from "react-router-dom";
 import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 import useClasses from "../../../../hooks/useClasses";
 
 
 const ManageClasses = () => {
     const [classes] = useClasses();
+
+    
     return (
         <div>
             <SectionTitle
@@ -22,7 +26,7 @@ const ManageClasses = () => {
                             <th>Email</th>
                             <th>Available Seats</th>
                             <th>Price</th>
-                            
+
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -65,15 +69,14 @@ const ManageClasses = () => {
                                 <td className="flex  mt-3 gap-3  items-center">
                                     <button className="btn btn-xs btn-success text-white" disabled={item.status !== "pending" && true}>Approve</button>
                                     <button className="btn btn-xs  bg-red-500 text-white" disabled={item.status !== "pending" && true}>Deny</button>
-                                    <button className="btn btn-xs btn-info text-white">Feedback</button>
+                                    <Link to={`/dashboard/feedback/${item._id}`}> <button className="btn btn-xs btn-info text-white">Feedback</button></Link>
                                 </td>
                             </tr>)
                         }
-
                     </tbody>
-
                 </table>
             </div>
+
         </div >
     );
 };
