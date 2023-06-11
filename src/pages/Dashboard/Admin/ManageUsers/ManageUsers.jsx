@@ -16,32 +16,32 @@ const ManageUsers = () => {
     });
 
     const handleMakeAdmin = (email) => {
-        axiosSecure.patch('/users', {email: email, role: "admin"})
-        .then(res => {
-            if (res.data.modifiedCount > 0) {
-                refetch()
-                Swal.fire({
-                    icon: 'success',
-                    title: 'user assigned as Admin',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        })
+        axiosSecure.patch('/users', { email: email, role: "admin" })
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'user assigned as Admin',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
     }
     const handleMakeInstructor = (email) => {
-        axiosSecure.patch('/users', {email: email, role: "instructor"})
-        .then(res => {
-            if (res.data.modifiedCount > 0) {
-                refetch()
-                Swal.fire({
-                    icon: 'success',
-                    title: 'user assigned as Instructor',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        })
+        axiosSecure.patch('/users', { email: email, role: "instructor" })
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'user assigned as Instructor',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
     }
     return (
         <div>
@@ -88,8 +88,18 @@ const ManageUsers = () => {
                                         {user.role}
                                     </td>
                                     <td >
-                                    <button onClick={() => handleMakeAdmin(user.email)}  className="btn btn-xs bg-green-500 hover:bg-green-600 text-white me-2" disabled={user.role === "admin" && true}><FaUserTie/> Make Admin</button>
-                                    <button onClick={() => handleMakeInstructor(user.email)} className="btn btn-xs  bg-blue-500 hover:bg-blue-600 text-white" disabled={user.role === "instructor" || user.role ===  "admin" && true}><FaUserGraduate/>Make Instructor</button>
+                                        <button
+                                            onClick={() => handleMakeAdmin(user.email)}
+                                            className="btn btn-xs bg-green-500 hover:bg-green-600 text-white me-2"
+                                            disabled={user.role === "admin" && true}>
+                                            <FaUserTie /> Make Admin
+                                        </button>
+                                        <button
+                                            onClick={() => handleMakeInstructor(user.email)}
+                                            className="btn btn-xs  bg-blue-500 hover:bg-blue-600 text-white"
+                                            disabled={user.role === "instructor" || user.role === "admin" && true}>
+                                            <FaUserGraduate />Make Instructor
+                                        </button>
                                     </td>
                                 </tr>)
                             }

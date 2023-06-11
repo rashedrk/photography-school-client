@@ -2,12 +2,31 @@
 import { Link } from "react-router-dom";
 import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 import useClasses from "../../../../hooks/useClasses";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 
 const ManageClasses = () => {
-    const [classes] = useClasses();
+    const [classes, refetch] = useClasses();
+    const [axiosSecure] = useAxiosSecure();
 
-    
+    const setStatus = (id, status) => {
+        console.log(id, status);
+        axiosSecure.patch('/classes/status', { status: status, id: id })
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    refetch();
+                    Swal.fire({
+                        icon: 'success',
+                        title: `classes has been ${status}!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
+
+
     return (
         <div>
             <SectionTitle
@@ -67,9 +86,19 @@ const ManageClasses = () => {
                                     ${item.price}
                                 </td>
                                 <td className="flex  mt-3 gap-3  items-center">
-                                    <button className="btn btn-xs btn-success text-white" disabled={item.status !== "pending" && true}>Approve</button>
-                                    <button className="btn btn-xs  bg-red-500 text-white" disabled={item.status !== "pending" && true}>Deny</button>
-                                    <Link to={`/dashboard/feedback/${item._id}`}> <button className="btn btn-xs btn-info text-white">Feedback</button></Link>
+                                    <button
+                                        onClick={() => setStatus(item._id, "approved")}
+                                        className="btn btn-xs btn-success text-white"
+                                        disabled={item.status !== "pending" && true}
+                                    >Approve</button>
+                                    <button
+                                        onClick={() => setStatus(item._id, "denied")}
+                                        className="btn btn-xs  bg-red-500 text-white"
+                                        disabled={item.status !== "pending" && true}
+                                    >Deny</button>
+                                    <Link to={`/dashboard/feedback/${item._id}`}>
+                                        <button className="btn btn-xs btn-info text-white">Feedback</button>
+                                    </Link>
                                 </td>
                             </tr>)
                         }
