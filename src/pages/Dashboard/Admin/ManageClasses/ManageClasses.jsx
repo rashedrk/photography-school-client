@@ -7,8 +7,8 @@ const ManageClasses = () => {
     return (
         <div>
             <SectionTitle
-                title="My Selected Class"
-                subTitle="Join now"
+                title="All Class"
+                subTitle="Manage"
             />
             <div className="overflow-x-auto mt-10 mx-5">
                 <table className="table">
