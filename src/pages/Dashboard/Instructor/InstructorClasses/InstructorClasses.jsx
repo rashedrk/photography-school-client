@@ -1,38 +1,21 @@
-
-import { Link } from "react-router-dom";
-import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
-import useClasses from "../../../../hooks/useClasses";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import Swal from "sweetalert2";
 
-
-const ManageClasses = () => {
-    const [classes, refetch] = useClasses();
+const InstructorClasses = () => {
+    const { user, loading } = useAuth();
     const [axiosSecure] = useAxiosSecure();
 
-    const setStatus = (id, status) => {
-        console.log(id, status);
-        axiosSecure.patch('/classes/status', { status: status, id: id })
-            .then(res => {
-                if (res.data.modifiedCount > 0) {
-                    refetch();
-                    Swal.fire({
-                        icon: 'success',
-                        title: `classes has been ${status}!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-            })
-    }
-
-
+    const { data: classes = [] } = useQuery({
+        queryKey: ['classes', user?.email],
+        enabled: !loading,
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/classes/instructor?email=${user.email}`)
+            return res.data
+        }
+    })
     return (
         <div>
-            <SectionTitle
-                title="All Class"
-                subTitle="Manage"
-            />
             <div className="overflow-x-auto mt-10 mx-5">
                 <table className="table">
                     {/* head */}
@@ -42,10 +25,10 @@ const ManageClasses = () => {
                             <th>Status</th>
                             <th>Course</th>
                             <th>Instructor</th>
-                            <th>Email</th>
+                            <th>Enrolled</th>
                             <th>Available Seats</th>
                             <th>Price</th>
-
+                            <th>Feedback</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -74,40 +57,28 @@ const ManageClasses = () => {
                                 <td>
                                     {item.instructor}
                                 </td>
-                                <td>
-                                    {/* TODO: Email data is not present in class 
-                                    Aggregation needed */}
-                                    {item.email}
-                                </td>
-                                <td>
-                                    {item.availableSeats}
+                                <td className="font-bold">
+                                    {item.enrolled || 0}
                                 </td>
                                 <td className="font-bold">
+                                    {item.availableSeats}
+                                </td>
+                                <td >
                                     ${item.price}
                                 </td>
-                                <td className="flex  mt-3 gap-3  items-center">
-                                    <button
-                                        onClick={() => setStatus(item._id, "approved")}
-                                        className="btn btn-xs btn-success text-white"
-                                        disabled={item.status !== "pending" && true}
-                                    >Approve</button>
-                                    <button
-                                        onClick={() => setStatus(item._id, "denied")}
-                                        className="btn btn-xs  bg-red-500 text-white"
-                                        disabled={item.status !== "pending" && true}
-                                    >Deny</button>
-                                    <Link to={`/dashboard/feedback/${item._id}`}>
-                                        <button className="btn btn-xs btn-info text-white">Feedback</button>
-                                    </Link>
+                                <td >
+                                    {item.status === "denied" && item.feedback}
+                                </td>
+                                <td>
+                                    <button className="btn btn-xs btn-primary text-white">Update</button>
                                 </td>
                             </tr>)
                         }
                     </tbody>
                 </table>
             </div>
-
-        </div >
+        </div>
     );
 };
 
-export default ManageClasses;
+export default InstructorClasses;

@@ -40,7 +40,7 @@ const Dashboard = () => {
                     {
                         role === "instructor" && <>
                         <li><Link to="/dashboard/addclass"><FiEdit className="text-lg" />Add a Class</Link></li>
-                        <li><Link to="/dashboard/addedclasses"><BiChalkboard className="text-lg" />My Classes</Link></li>
+                        <li><Link to="/dashboard/instructorsclasses"><BiChalkboard className="text-lg" />My Classes</Link></li>
                         </>
                     }
 
