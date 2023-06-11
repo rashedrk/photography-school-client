@@ -4,9 +4,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoWalletSharp } from "react-icons/io5";
 import { MdOutlineClass } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
+import { BiChalkboard } from "react-icons/bi";
 
 const Dashboard = () => {
-    const isAdmin = true;
+    const role = "instructor";
 
     return (
         <div className="drawer lg:drawer-open">
@@ -23,7 +24,7 @@ const Dashboard = () => {
                 <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
                     {
-                        !isAdmin && <>
+                        role === "student" && <>
                             <li><Link to="/dashboard/myclasses"><MdOutlineClass className="text-lg" />My Selected Classes</Link></li>
                             <li><Link to="/dashboard/enrolled">< FaBookReader className="text-base" /> My Enrolled Classes</Link></li>
                             <li><Link to="/dashboard/payment"><IoWalletSharp className="text-base" /> Make Payment</Link></li>
@@ -31,12 +32,17 @@ const Dashboard = () => {
                         </>
                     }
                     {
-                        isAdmin && <>
+                        role === "admin" && <>
                         <li><Link to="/dashboard/manageclasses"><FiEdit className="text-lg" />Manage Classes</Link></li>
                         <li><Link to="/dashboard/manageusers"><FaUserCog className="text-lg" />Manage Users</Link></li>
                         </>
                     }
-
+                    {
+                        role === "instructor" && <>
+                        <li><Link to="/dashboard/addclass"><FiEdit className="text-lg" />Add a Class</Link></li>
+                        <li><Link to="/dashboard/addedclasses"><BiChalkboard className="text-lg" />My Classes</Link></li>
+                        </>
+                    }
 
                 </ul>
 
