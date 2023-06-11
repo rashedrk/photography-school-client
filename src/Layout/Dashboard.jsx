@@ -1,5 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import {  FaBookReader, FaHistory } from "react-icons/fa";
+import {  GiHamburgerMenu } from "react-icons/gi";
 import { IoWalletSharp } from "react-icons/io5";
 import { MdOutlineClass } from "react-icons/md";
 
@@ -7,11 +8,11 @@ const Dashboard = () => {
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col ">
+            <div className="drawer-content flex flex-row-reverse lg:flex-col">
                 {/* Page content here */}
                 <Outlet/>
 
-                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                <label htmlFor="my-drawer-2" className="btn btn-ghost btn-sm drawer-button lg:hidden"><GiHamburgerMenu/></label>
 
             </div>
             <div className="drawer-side">

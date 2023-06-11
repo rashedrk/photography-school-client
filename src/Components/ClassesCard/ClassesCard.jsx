@@ -25,7 +25,6 @@ const ClassesCard = ({ classItem }) => {
                     if (res.data.insertedId) {
                         refetch();
                         Swal.fire({
-                            position: 'top-end',
                             icon: 'success',
                             title: 'Your Class has been added',
                             showConfirmButton: false,
