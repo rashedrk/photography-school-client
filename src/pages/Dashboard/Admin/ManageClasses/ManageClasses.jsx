@@ -1,0 +1,81 @@
+import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
+import useClasses from "../../../../hooks/useClasses";
+
+
+const ManageClasses = () => {
+    const [classes] = useClasses();
+    return (
+        <div>
+            <SectionTitle
+                title="My Selected Class"
+                subTitle="Join now"
+            />
+            <div className="overflow-x-auto mt-10 mx-5">
+                <table className="table">
+                    {/* head */}
+                    <thead className="bg-slate-200">
+                        <tr>
+                            <th>No</th>
+                            <th>Status</th>
+                            <th>Course</th>
+                            <th>Instructor</th>
+                            <th>Email</th>
+                            <th>Available Seats</th>
+                            <th>Price</th>
+                            
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            classes.map((item, index) => <tr key={item._id}>
+                                <td>
+                                    {index + 1}
+                                </td>
+                                <td>
+                                    <button className={`badge py-3 text-white ${item.status === "approved" ? "bg-green-400" : "bg-red-300"}`}>{item.status}</button>
+                                </td>
+                                <td className="font-semibold">
+                                    <div className="flex items-center space-x-3">
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-12 h-12">
+                                                <img src={item.image} />
+                                            </div>
+                                        </div>
+                                        <div className="font-bold">
+                                            {item.name}
+                                        </div>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    {item.instructor}
+                                </td>
+                                <td>
+                                    {/* TODO: Email data is not present in class 
+                                    Aggregation needed */}
+                                    {item.email}
+                                </td>
+                                <td>
+                                    {item.availableSeats}
+                                </td>
+                                <td className="font-bold">
+                                    ${item.price}
+                                </td>
+                                <td className="flex  mt-3 gap-3  items-center">
+                                    <button className="btn btn-xs btn-success text-white" disabled={item.status !== "pending" && true}>Approve</button>
+                                    <button className="btn btn-xs  bg-red-500 text-white" disabled={item.status !== "pending" && true}>Deny</button>
+                                    <button className="btn btn-xs btn-info text-white">Feedback</button>
+                                </td>
+                            </tr>)
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div >
+    );
+};
+
+export default ManageClasses;

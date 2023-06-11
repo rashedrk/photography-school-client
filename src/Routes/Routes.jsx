@@ -9,6 +9,7 @@ import Classes from "../pages/Classes/Classes";
 import Dashboard from "../Layout/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import MyClasses from "../pages/Dashboard/Student/MyClasses/MyClasses"
+import ManageClasses from "../pages/Dashboard/Admin/ManageClasses/ManageClasses";
 
 export const router = createBrowserRouter([
     {
@@ -41,9 +42,16 @@ export const router = createBrowserRouter([
         path: 'dashboard',
         element: <PrivateRoute><Dashboard/></PrivateRoute>,
         children: [
+            //user route
             {
                 path: "myclasses",
                 element:<MyClasses/>
+            },
+
+            //admin route
+            {
+                path: "manageclasses",
+                element: <ManageClasses/>
             }
         ]
     },
