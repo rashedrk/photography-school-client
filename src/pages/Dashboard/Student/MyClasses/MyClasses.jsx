@@ -1,9 +1,9 @@
 import { FaTrash } from "react-icons/fa";
-import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
-import useSelectedClass from "../../../hooks/useSelectedClass";
+import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
+import useSelectedClass from "../../../../hooks/useSelectedClass";
 import { Link } from "react-router-dom";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import useAuth from "../../../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const MyClasses = () => {
