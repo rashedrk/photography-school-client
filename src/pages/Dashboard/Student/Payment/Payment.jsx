@@ -9,7 +9,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 const Payment = () => {
     //using LINK state to pass price
     const location = useLocation();
-    const { price, classId, className,selectedId } = location.state;
+    const { price, classId, className,selectedId } = location.state || {};
     const totalPrice = parseFloat(price);
 
     return (
