@@ -2,6 +2,7 @@ import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 
 import { useEffect, useState } from "react";
 import TopClassCard from "../../../Components/TopClassCard/TopClassCard";
+import { Link } from "react-router-dom";
 
 
 const TopClasses = () => {
@@ -12,7 +13,7 @@ const TopClasses = () => {
             .then(res => res.json())
             .then(data => setClasses(data))
     }, []);
-   
+
 
     return (
         <>
@@ -26,7 +27,9 @@ const TopClasses = () => {
                 }
             </div>
             <div className="text-center mb-10">
-                <button className="btn w-96 btn-outline ">See All Classes </button>
+                <Link to="classes">
+                    <button className="btn w-96 btn-outline ">See All Classes </button>
+                </Link>
             </div>
         </>
 
