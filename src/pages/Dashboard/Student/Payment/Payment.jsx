@@ -9,20 +9,24 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 const Payment = () => {
     //using LINK state to pass price
     const location = useLocation();
-    const price = parseFloat(location?.state?.price.toFixed(2));
-    
+    const { price, classId, className,selectedId } = location.state;
+    const totalPrice = parseFloat(price);
+
     return (
         <div>
             <SectionTitle
                 title="Payment"
                 subTitle="Make your"
             />
-                <Elements stripe={stripePromise}>
-                    <CheckOutForm 
-                        price={price}
-                    />
-                </Elements>
-            
+            <Elements stripe={stripePromise}>
+                <CheckOutForm
+                    price={totalPrice}
+                    classId={classId}
+                    className={className}
+                    selectedId={selectedId}
+                />
+            </Elements>
+
         </div>
     );
 };
