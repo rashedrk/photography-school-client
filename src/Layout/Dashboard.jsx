@@ -7,7 +7,6 @@ import { FiEdit } from "react-icons/fi";
 import { BiChalkboard } from "react-icons/bi";
 
 const Dashboard = () => {
-    const role = "instructor";
 
     return (
         <div className="drawer lg:drawer-open">
