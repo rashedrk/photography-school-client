@@ -30,7 +30,7 @@ const Dashboard = () => {
                             <li><Link to="/dashboard/myclasses"><MdOutlineClass className="text-lg" />My Selected Classes</Link></li>
                             <li><Link to="/dashboard/enrolled">< FaBookReader className="text-base" /> My Enrolled Classes</Link></li>
                             <li><Link to="/dashboard/payment"><IoWalletSharp className="text-base" /> Make Payment</Link></li>
-                            <li><Link to="/dashboard/payhistory"><FaHistory className="text-base" /> Payment History</Link></li>
+                            <li><Link to="/dashboard/payment/history"><FaHistory className="text-base" /> Payment History</Link></li>
                         </>
                     }
                     {

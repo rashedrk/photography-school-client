@@ -15,6 +15,7 @@ import Feedback from "../pages/Dashboard/Admin/Feedback/Feedback";
 import AddClass from "../pages/Dashboard/Instructor/AddClass/AddClass";
 import InstructorClasses from "../pages/Dashboard/Instructor/InstructorClasses/InstructorClasses";
 import Payment from "../pages/Dashboard/Student/Payment/Payment";
+import PaymentHistory from "../pages/Dashboard/Student/PaymentHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
     {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
             {
                 path: "payment",
                 element: <Payment/>
+            },
+            {
+                path:"payment/history",
+                element: <PaymentHistory/>
             },
 
             //admin route

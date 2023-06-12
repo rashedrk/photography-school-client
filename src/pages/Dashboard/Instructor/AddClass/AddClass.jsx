@@ -25,7 +25,7 @@ const AddClass = () => {
                 if (responseImg.success) {
                     const imgURL = responseImg.data.display_url;
                     const { name, instructor, email, availableSeats, price } = data;
-                    const newClass = { name, image: imgURL, instructor, email, availableSeats: parseInt(availableSeats), price: parseFloat(price), status: "pending" };
+                    const newClass = { name, image: imgURL, instructor, email, availableSeats: parseInt(availableSeats), price: parseFloat(price), status: "pending", enrolled: 0 };
                     
                     //send new class data to db
                     axiosSecure.post('/classes', newClass)
