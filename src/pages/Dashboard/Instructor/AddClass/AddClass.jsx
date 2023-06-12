@@ -7,12 +7,12 @@ import Swal from "sweetalert2";
 const hostingToken = import.meta.env.VITE_IMGBB_KEY;
 
 const AddClass = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const { user } = useAuth()
     const [axiosSecure] = useAxiosSecure();
 
     const onSubmit = data => {
-        console.log(data);
+        
         const formData = new FormData();
         formData.append('image', data.image[0])
         //hosting image to imagbb
@@ -26,11 +26,12 @@ const AddClass = () => {
                     const imgURL = responseImg.data.display_url;
                     const { name, instructor, email, availableSeats, price } = data;
                     const newClass = { name, image: imgURL, instructor, email, availableSeats: parseInt(availableSeats), price: parseFloat(price), status: "pending" };
-                    console.log(newClass);
+                    
                     //send new class data to db
                     axiosSecure.post('/classes', newClass)
                         .then(res => {
                             if (res.data.insertedId) {
+                                reset();
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Class successfully added',
