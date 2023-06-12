@@ -74,7 +74,7 @@ const ClassesCard = ({ classItem }) => {
                 <div className="card-actions mt-2">
                     {
                         location.pathname == "/dashboard/enrolled" ? <button className="btn primary-btn" disabled >Enrolled</button>
-                        : <button onClick={handleSelectClass} className="btn primary-btn" disabled={availableSeats == 0 || role !== "student" && true } >Select</button>
+                        : <button onClick={handleSelectClass} className="btn primary-btn" disabled={availableSeats == 0 || role === "admin" || role === "instructor" && true } >Select</button>
                     }
                     
                 </div>
