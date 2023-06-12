@@ -5,9 +5,11 @@ import { IoWalletSharp } from "react-icons/io5";
 import { MdOutlineClass } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { BiChalkboard } from "react-icons/bi";
+import useRole from "../hooks/useRole";
 
 const Dashboard = () => {
-
+    const [role] = useRole();
+    
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
