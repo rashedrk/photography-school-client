@@ -78,7 +78,7 @@ const MyClasses = () => {
                                             ${item.price}
                                         </td>
                                         <td className="flex gap-2  items-center">
-                                            <Link to="/dashboard/payment">
+                                            <Link to="/dashboard/payment" state={{price: item.price}}>
                                                 <button className="btn bg-green-600 hover:bg-green-500 text-white  btn-xs">Pay</button>
                                             </Link>
                                             <button onClick={() => handleDelete(item._id)} className="btn bg-red-500 hover:bg-red-400 text-white btn-xs"><FaTrash /></button>

@@ -8,8 +8,9 @@ import { BiChalkboard } from "react-icons/bi";
 import useRole from "../hooks/useRole";
 
 const Dashboard = () => {
-    const [role] = useRole();
-    
+    // TODO: Dynamic user role 
+    // const [role] = useRole();
+    const role = 'student'
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
