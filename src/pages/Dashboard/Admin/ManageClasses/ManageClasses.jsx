@@ -75,8 +75,7 @@ const ManageClasses = () => {
                                     {item.instructor}
                                 </td>
                                 <td>
-                                    {/* TODO: Email data is not present in class 
-                                    Aggregation needed */}
+                                    
                                     {item.email}
                                 </td>
                                 <td>

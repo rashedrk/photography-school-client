@@ -7,20 +7,21 @@ import useSelectedClass from "../../hooks/useSelectedClass";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import useRole from "../../hooks/useRole";
 
 const ClassesCard = ({ classItem }) => {
     const { user } = useAuth();
     const [, refetch] = useSelectedClass();
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location);
+    const [role] = useRole();
 
     const { _id, name, image, instructor, availableSeats, price } = classItem;
 
     const handleSelectClass = () => {
         if (user) {
             const classesItems = { classId: _id, name: name, image: image, instructor: instructor, price: price, email: user.email };
-            axios.post('http://localhost:3000/classes/selected', classesItems)
+            axios.post('https://photography-school-server-sable.vercel.app/classes/selected', classesItems)
                 .then(res => {
                     if (res.data.insertedId) {
                         refetch();
@@ -73,7 +74,7 @@ const ClassesCard = ({ classItem }) => {
                 <div className="card-actions mt-2">
                     {
                         location.pathname == "/dashboard/enrolled" ? <button className="btn primary-btn" disabled >Enrolled</button>
-                        : <button onClick={handleSelectClass} className="btn primary-btn" disabled={availableSeats == 0 && true} >Select</button>
+                        : <button onClick={handleSelectClass} className="btn primary-btn" disabled={availableSeats == 0 || role !== "student" && true } >Select</button>
                     }
                     
                 </div>

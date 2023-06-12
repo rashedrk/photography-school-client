@@ -61,7 +61,7 @@ const AddClass = () => {
                         {errors.name && <span className="text-red-600">Name field is required</span>}
                     </div>
                     <div className="form-control">
-                        {/* TODO - Upload a file and host to imgbb */}
+                        
                         <label className="label">
                             <span className="label-text">Class Image</span>
                         </label>

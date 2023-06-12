@@ -6,11 +6,15 @@ import { MdOutlineClass } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import { BiChalkboard } from "react-icons/bi";
 import useRole from "../hooks/useRole";
+import { AiFillHome } from "react-icons/ai";
+import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
-    // TODO: Dynamic user role 
-    // const [role] = useRole();
-    const role = 'student'
+    const {user} =useAuth();
+    console.log(user);
+    
+    const [role] = useRole();
+    // const role = 'student'
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -25,6 +29,16 @@ const Dashboard = () => {
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
+                    <div className="text-center mb-5">
+                        <div className="avatar">
+                            <div className="w-24 rounded-full">
+                                <img src={user.photoURL} />
+                            </div>
+                        </div>
+                        <h2 className="text-2xl font-semibold">{user.displayName}</h2>
+                        <h5 className="text-lg">{role}</h5>
+                    </div>
+                    <li><Link to="/"><AiFillHome className="text-lg" />Return Home</Link></li>
                     {
                         role === "student" && <>
                             <li><Link to="/dashboard/myclasses"><MdOutlineClass className="text-lg" />My Selected Classes</Link></li>
@@ -35,14 +49,14 @@ const Dashboard = () => {
                     }
                     {
                         role === "admin" && <>
-                        <li><Link to="/dashboard/manageclasses"><FiEdit className="text-lg" />Manage Classes</Link></li>
-                        <li><Link to="/dashboard/manageusers"><FaUserCog className="text-lg" />Manage Users</Link></li>
+                            <li><Link to="/dashboard/manageclasses"><FiEdit className="text-lg" />Manage Classes</Link></li>
+                            <li><Link to="/dashboard/manageusers"><FaUserCog className="text-lg" />Manage Users</Link></li>
                         </>
                     }
                     {
                         role === "instructor" && <>
-                        <li><Link to="/dashboard/addclass"><FiEdit className="text-lg" />Add a Class</Link></li>
-                        <li><Link to="/dashboard/instructorsclasses"><BiChalkboard className="text-lg" />My Classes</Link></li>
+                            <li><Link to="/dashboard/addclass"><FiEdit className="text-lg" />Add a Class</Link></li>
+                            <li><Link to="/dashboard/instructorsclasses"><BiChalkboard className="text-lg" />My Classes</Link></li>
                         </>
                     }
 
