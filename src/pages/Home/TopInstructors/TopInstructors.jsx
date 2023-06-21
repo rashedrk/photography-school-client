@@ -12,7 +12,7 @@ import { Autoplay, Pagination } from "swiper";
 const TopInstructors = () => {
     const [instructors, setInstructors] = useState([]);
     useEffect(() => {
-        fetch('https://photography-school-server-sable.vercel.app/instructors/top')
+        fetch('http://localhost:3000/instructors/top')
             .then(res => res.json())
             .then(data => setInstructors(data))
     }, [])

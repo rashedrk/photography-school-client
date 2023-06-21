@@ -9,7 +9,7 @@ const TopClasses = () => {
     const [classes, setClasses] = useState([]);
 
     useEffect(() => {
-        fetch('https://photography-school-server-sable.vercel.app/classes/top')
+        fetch('http://localhost:3000/classes/top')
             .then(res => res.json())
             .then(data => setClasses(data))
     }, []);

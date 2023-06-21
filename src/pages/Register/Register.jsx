@@ -19,7 +19,7 @@ const Register = () => {
                 updateUserProfile(data.name, data.photoUrl)
                     .then(() => {
                         const user = { name: data.name, image: data.photoUrl, email: data.email, gender: data.gender, role: "student" }
-                        axios.post('https://photography-school-server-sable.vercel.app/users', user)
+                        axios.post('http://localhost:3000/users', user)
                             .then(res => {
                                 if (res.data.insertedId) {
                                     Swal.fire({

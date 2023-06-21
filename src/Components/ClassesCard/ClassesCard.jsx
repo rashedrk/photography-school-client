@@ -21,7 +21,7 @@ const ClassesCard = ({ classItem }) => {
     const handleSelectClass = () => {
         if (user) {
             const classesItems = { classId: _id, name: name, image: image, instructor: instructor, price: price, email: user.email };
-            axios.post('https://photography-school-server-sable.vercel.app/classes/selected', classesItems)
+            axios.post('http://localhost:3000/classes/selected', classesItems)
                 .then(res => {
                     if (res.data.insertedId) {
                         refetch();

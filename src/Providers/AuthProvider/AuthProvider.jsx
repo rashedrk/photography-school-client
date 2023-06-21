@@ -9,28 +9,30 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(null);
 
     const googleProvider = new GoogleAuthProvider();
 
     // get current user
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser);
+            
+            setUser(currentUser);            
             if (currentUser) {
-                axios.post('https://photography-school-server-sable.vercel.app/jwt', { email: currentUser.email })
+                axios.post('http://localhost:3000/jwt', { email: currentUser?.email })
                     .then(data => {
                         localStorage.setItem('access-token', data.data.token);
                         setLoading(false);
                     })
                     
             } else {
-                localStorage.removeItem('access-token')
+                localStorage.removeItem('access-token');
+                
             }
             
         })
-        return () => unsubscribe();
+        return () => unsubscribe;
     }, []);
 
     // create user by signup 

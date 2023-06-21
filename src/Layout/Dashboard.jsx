@@ -10,7 +10,7 @@ import { AiFillHome } from "react-icons/ai";
 import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
-    const {user} =useAuth();
+    const {user} = useAuth();
     console.log(user);
     
     const [role] = useRole();

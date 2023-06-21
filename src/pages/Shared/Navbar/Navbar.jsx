@@ -7,8 +7,8 @@ import useRole from "../../../hooks/useRole";
 const Navbar = () => {
     const { user, logout } = useAuth();
     const [classes] = useSelectedClass();
-    // console.log(classes);
     const [role] = useRole();
+    
     const handleLogout = () => {
         logout()
             .then(() => { })
@@ -19,7 +19,7 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/classes">Classes</Link></li>
         <li><Link to="/instructors">Instructors</Link></li>
-        <li><Link to="/dashboard">Dashboard</Link></li>
+        {user && <li><Link to="/dashboard/myclasses">Dashboard</Link></li>}
 
     </>
     return (
