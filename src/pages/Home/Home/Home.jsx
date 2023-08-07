@@ -1,4 +1,5 @@
 import About from "../About/About";
+import CountSection from "../CountSection/CountSection";
 import Faq from "../FAQ/FAQ";
 import SliderTop from "../SliderTop/SliderTop";
 import TopClasses from "../TopClasses/TopClasses";
@@ -10,6 +11,7 @@ const Home = () => {
             <SliderTop/>
             <About/>
             <TopClasses/>
+            <CountSection/>
             <TopInstructors/>
             <Faq/>
         </>
