@@ -18,7 +18,7 @@ const SocialLogin = () => {
                     name: user.displayName, email: user.email, image: user.photoURL,
                 }
                 //register user to db
-                axios.post('http://localhost:3000/users', loggedUser)
+                axios.post('https://photography-school-server-sable.vercel.app/users', loggedUser)
                     .then(() => {
                             Swal.fire({
                                 icon: 'success',
